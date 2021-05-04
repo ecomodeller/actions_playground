@@ -35,10 +35,8 @@ jobs:
           nuget-version: '5.x'
       - name: Install nuget packages
         run: |
-          nuget install DHI.DFS -OutputDirectory packages -Source "https://api.nuget.org/v3/index.json"
-          nuget install DHI.Projections -OutputDirectory packages -Source "https://api.nuget.org/v3/index.json"
           nuget install DHI.MikeCore.Linux.rhel7 -Version 19.0.0 -OutputDirectory packages
-      - run: cp -r packages/DHI.MikeCore.Linux.rhel7.19.0.0/runtimes/linux-x64/native/* bin
+      - run: cp -r packages/DHI.MikeCore.Linux.rhel7.19.0.0/runtimes/linux-x64/native/* bin/
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.3
         with: 
