@@ -24,19 +24,20 @@ jobs:
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
       - uses: actions/checkout@v2
-      - name: Create packages directory
-        run: mkdir packages
-      - name: Create bin directory
-        run: mkdir -p mikecore/bin
+      - run: mkdir packages
       - uses: actions/checkout@v2
       - name: Get nuget packages
         uses: nuget/setup-nuget@v1
         with:
           nuget-version: '5.x'
+      - run: pwd
       - run: ls -l
       - name: Install nuget packages
         run: |
           nuget install DHI.MikeCore.Linux.rhel7 -Version 19.0.0 -OutputDirectory packages
+      - run: mkdir -p mikecore/bin
+      - run: pwd
+      - run: ls -l
       - run: cp -r packages/DHI.MikeCore.Linux.rhel7.19.0.0/runtimes/linux-x64/native/* mikecore/bin/
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.3
