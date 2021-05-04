@@ -39,6 +39,14 @@ jobs:
       - run: pwd
       - run: ls -l
       - run: cp -r packages/DHI.MikeCore.Linux.rhel7.19.0.0/runtimes/linux-x64/native/* mikecore/bin/
+      - run: sudo apt-get install patchelf
+      - run: |
+         patchelf --set-rpath '$ORIGIN' mikecore/bin/libufs.so 
+         patchelf --set-rpath '$ORIGIN' mikecore/bin/libeum.so
+         patchelf --set-rpath '$ORIGIN' mikecore/bin/libMzCart.so
+         patchelf --set-rpath '$ORIGIN' mikecore/bin/libpfs2004.so
+         patchelf --set-rpath '$ORIGIN' mikecore/bin/libcilkrts.so.5
+          
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.3
         with: 
