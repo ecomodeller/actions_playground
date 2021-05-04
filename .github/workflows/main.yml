@@ -27,16 +27,17 @@ jobs:
       - name: Create packages directory
         run: mkdir packages
       - name: Create bin directory
-        run: mkdir bin
+        run: mkdir mikercore/bin
       - uses: actions/checkout@v2
       - name: Get nuget packages
         uses: nuget/setup-nuget@v1
         with:
           nuget-version: '5.x'
+      - run: ls -l
       - name: Install nuget packages
         run: |
           nuget install DHI.MikeCore.Linux.rhel7 -Version 19.0.0 -OutputDirectory packages
-      - run: cp -r packages/DHI.MikeCore.Linux.rhel7.19.0.0/runtimes/linux-x64/native/* bin/
+      - run: cp -r packages/DHI.MikeCore.Linux.rhel7.19.0.0/runtimes/linux-x64/native/* mikecore/bin/
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.3
         with: 
