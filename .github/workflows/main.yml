@@ -45,7 +45,8 @@ jobs:
          patchelf --set-rpath '$ORIGIN' mikecore/bin/libeum.so
          patchelf --set-rpath '$ORIGIN' mikecore/bin/libMzCart.so
          patchelf --set-rpath '$ORIGIN' mikecore/bin/libpfs2004.so
-         patchelf --set-rpath '$ORIGIN' mikecore/bin/libcilkrts.so.5
+         patchelf --set-rpath '$ORIGIN' mikecore/bin/libxerces-c-3.1.so
+         
           
       - name: Upload a Build Artifact
         uses: actions/upload-artifact@v2.2.3
