@@ -26,6 +26,8 @@ jobs:
       - uses: actions/checkout@v2
       - name: Create packages directory
         run: mkdir packages
+      - name: Create bin directory
+        run: mkdir bin
       - uses: actions/checkout@v2
       - name: Get nuget packages
         uses: nuget/setup-nuget@v1
@@ -35,3 +37,9 @@ jobs:
         run: |
           nuget install DHI.DFS -OutputDirectory packages -Source "https://api.nuget.org/v3/index.json"
           nuget install DHI.Projections -OutputDirectory packages -Source "https://api.nuget.org/v3/index.json"
+      - run: cp -r packages/DHI.MikeCore.Linux.rhel7.19.0.0/runtimes/linux-x64/native/* bin
+      - name: Upload a Build Artifact
+        uses: actions/upload-artifact@v2.2.3
+        with: 
+          name: bin
+          path: bin
